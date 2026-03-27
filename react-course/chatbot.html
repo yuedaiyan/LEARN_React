@@ -10,20 +10,25 @@
         <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
         <script src="https://unpkg.com/supersimpledev/babel.js"></script>
         <script type="text/babel">
-            function ChatInput() {
-
-
-                const [inputText,setInputText]=React.useState('')
-
+            function ChatInput({ chatMessages, setChatMessage }) {
+                const [inputText, setInputText] = React.useState("");
 
                 function saveInputtext(event) {
                     setInputText(event.target.value);
                 }
 
-                function sendMessage(){
-                    console.log(inputText);
-                }
+                function sendMessage() {
+                    setChatMessage([
+                        ...chatMessages,
+                        {
+                            message: inputText,
+                            sender: "user",
+                            id: crypto.randomUUID(),
+                        },
+                    ]);
 
+                    setInputText('')
+                }
 
                 return (
                     <>
@@ -31,10 +36,9 @@
                             placeholder="Send a message to Chatbot"
                             size="30"
                             onChange={saveInputtext}
+                            value={inputText}
                         />
-                        <button
-                        onClick={sendMessage} 
-                        >Send</button>
+                        <button onClick={sendMessage}>Send</button>
                     </>
                 );
             }
@@ -63,7 +67,23 @@
                 );
             }
 
-            function ChatMessages() {
+            function ChatMessages({chatMessages}) {
+                return (
+                    <>
+                        {chatMessages.map((chatMessage) => {
+                            return (
+                                <ChatMessage
+                                    message={chatMessage.message}
+                                    sender={chatMessage.sender}
+                                    key={chatMessage.id}
+                                />
+                            );
+                        })}
+                    </>
+                );
+            }
+
+            function App() {
                 const [chatMessages, setChatMessage] = React.useState([
                     {
                         message: "hello chatbot",
@@ -87,40 +107,14 @@
                     },
                 ]);
 
-                function sendMessage() {
-                    setChatMessage([
-                        ...chatMessages,
-                        {
-                            message: "test",
-                            sender: "user",
-                            id: crypto.randomUUID(),
-                        },
-                    ]);
-
-                    console.log(chatMessages);
-                }
-
                 return (
+                    // 每个组件的内容,命名建议一致
                     <>
-                        <button onClick={sendMessage}>Send message</button>
-                        {chatMessages.map((chatMessage) => {
-                            return (
-                                <ChatMessage
-                                    message={chatMessage.message}
-                                    sender={chatMessage.sender}
-                                    key={chatMessage.id}
-                                />
-                            );
-                        })}
-                    </>
-                );
-            }
-
-            function App() {
-                return (
-                    <>
-                        <ChatInput />
-                        <ChatMessages />
+                        <ChatInput
+                            chatMessages={chatMessages}
+                            setChatMessage={setChatMessage}
+                        />
+                        <ChatMessages chatMessages={chatMessages} />
                     </>
                 );
             }
