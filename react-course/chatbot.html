@@ -13,36 +13,89 @@
             function ChatInput() {
                 return (
                     <>
-                        <input placeholder="Send a message to Chatbot" size="30" />
+                        <input
+                            placeholder="Send a message to Chatbot"
+                            size="30"
+                        />
                         <button>Send</button>
                     </>
                 );
             }
 
             function ChatMessage({ message, sender }) {
-                // const { message, sender } = props;
-
-                // if (sender === "user") {
-                //     return (
-                //         <div>
-                //             <p>{message}</p>
-                //             <img width="50" src="user.png" />
-                //         </div>
-                //     );
-                // } else if (sender === "robot") {
-                //     return (
-                //         <div>
-                //             <img width="50" src="robot.png" />
-                //             <p>{message}</p>
-                //         </div>
-                //     );
-                // }
                 return (
                     <div>
-                        <p>{sender === "robot" && <img width="50" src="robot.png" />}</p>
+                        <p>
+                            {sender === "robot" && (
+                                <img
+                                    width="50"
+                                    src="robot.png"
+                                />
+                            )}
+                        </p>
                         {message}
-                        <p>{sender === "user" && <img width="50" src="user.png" />}</p>
+                        <p>
+                            {sender === "user" && (
+                                <img
+                                    width="50"
+                                    src="user.png"
+                                />
+                            )}
+                        </p>
                     </div>
+                );
+            }
+
+            function ChatMessages() {
+                const [chatMessages, setChatMessage] = React.useState([
+                    {
+                        message: "hello chatbot",
+                        sender: "user",
+                        id: "id1",
+                    },
+                    {
+                        message: "Hello! How can I help you?",
+                        sender: "robot",
+                        id: "id2",
+                    },
+                    {
+                        message: "can you get me todays date?",
+                        sender: "user",
+                        id: "id3",
+                    },
+                    {
+                        message: "Today is March 27",
+                        sender: "robot",
+                        id: "id4",
+                    },
+                ]);
+
+                function sendMessage() {
+                    setChatMessage([
+                        ...chatMessages,
+                        {
+                            message: "test",
+                            sender: "user",
+                            id: crypto.randomUUID(),
+                        },
+                    ]);
+
+                    console.log(chatMessages);
+                }
+
+                return (
+                    <>
+                        <button onClick={sendMessage}>Send message</button>
+                        {chatMessages.map((chatMessage) => {
+                            return (
+                                <ChatMessage
+                                    message={chatMessage.message}
+                                    sender={chatMessage.sender}
+                                    key={chatMessage.id}
+                                />
+                            );
+                        })}
+                    </>
                 );
             }
 
@@ -50,10 +103,7 @@
                 return (
                     <>
                         <ChatInput />
-                        <ChatMessage message="hello chatbot" sender="user" />
-                        <ChatMessage message="Hlello! How can I help you?" sender="robot" />
-                        <ChatMessage message="can you get me todays date?" sender="user" />
-                        <ChatMessage message="Today is March 27" sender="robot" />
+                        <ChatMessages />
                     </>
                 );
             }
