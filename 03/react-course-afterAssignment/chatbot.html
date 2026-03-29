@@ -19,26 +19,42 @@
                 }
 
                 async function sendMessage() {
-                    // 将inputText传给后端(假) → 通过后端获取机器人的回复(前端模拟回复)
-                    const response = await Chatbot.getResponseAsync(inputText);
+                    // 首先: 情况输入框
+                    setInputText("");
 
-                    const newChatMessage = [
-                        // 复制所有旧的消息,添加新的消息
+                    // 固定唯一的 robotId
+                    const robotId = crypto.randomUUID();
+                    // 先将 Loadding… 显示出来
+                    let response = "Loading…";
+                    const newChatMesages = [
                         ...chatMessages,
                         {
                             message: inputText,
                             sender: "user",
                             id: crypto.randomUUID(),
                         },
+                    ];
+                    // 先将 Loadding… 显示出来
+                    setChatMessages([
+                        ...newChatMesages,
                         {
                             message: response,
                             sender: "robot",
-                            id: crypto.randomUUID(),
+                            id: robotId,
                         },
-                    ];
+                    ]);
 
-                    setChatMessages(newChatMessage);
-                    setInputText("");
+                    // 等待后端回复,再次设置聊天框内容
+                    response = await Chatbot.getResponseAsync(inputText);
+                    setChatMessages([
+                        // 复制所有旧的消息,添加新的消息
+                        ...newChatMesages,
+                        {
+                            message: response,
+                            sender: "robot",
+                            id: robotId,
+                        },
+                    ]);
                 }
 
                 function enterDown(event) {
@@ -152,5 +168,3 @@
         </script>
     </body>
 </html>
-
- <!-- TODO: 搞明白ID的意义 -->
