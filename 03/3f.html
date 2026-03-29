@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <head>
-        <title>3e</title>
+        <title>3f</title>
         <!-- <link rel="icon" href="" /> -->
         <link
             rel="stylesheet"
@@ -29,12 +29,23 @@
                 );
             }
 
+            // 重置按钮组件
+            function ResetButton({currTimes,setTimes}){
+                // 主要功能函数,重置为 0
+                function buttonClick(){
+                    setTimes(0)
+                }
+                return <button onClick={buttonClick}>Reset</button>
+            }
+
             function App() {
+                // 全局状态
                 const [currTimes, setTimes] = React.useState(0);
                 return (
                     <>
                         <ClickButton currTimes={currTimes} setTimes={setTimes}/>
                         <ClickButton currTimes={currTimes} setTimes={setTimes} />
+                        <ResetButton currTimes={currTimes} setTimes={setTimes} />
                     </>
                 );
             }
