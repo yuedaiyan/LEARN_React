@@ -2,6 +2,68 @@
 <html>
     <head>
         <title>chatbot</title>
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                /* padding: 30px 10px 30px 10px; */
+                margin: 0px 0px 0px 0px;
+            }
+            .send-button {
+                background-color: rgb(25, 135, 84);
+                color: white;
+                padding: 12px 20px 12px 20px;
+                margin: 0px 0px 0px 10px;
+                border: none;
+                border-radius: 5px;
+                font-size: 15px;
+                cursor: pointer;
+            }
+            .chat-input {
+                padding: 12px 15px 12px 15px;
+                border-radius: 10px;
+                border: 1px solid black;
+                font-size: 15px;
+                flex-grow: 1;
+            }
+            .chat-input-contaier {
+                display: flex;
+                margin: 10px 0px 20px 0px;
+            }
+            .app-container {
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+            .chat-message-user {
+                display: flex;
+                justify-content: end;
+                align-items: center;
+            }
+            .chat-message-robot {
+                display: flex;
+                justify-content: start;
+                align-items: center;
+            }
+            .chat-message-text {
+                background-color: rgb(244, 244, 244);
+                padding: 10px 15px 10px 15px;
+                margin: 15px 10px 10px 10px;
+                border-radius: 5px;
+                max-width: 300px;
+            }
+            .chat-message-profile {
+                width: 40px;
+            }
+            .chat-message-container {
+                flex-grow: 1;
+                margin: 30px 0px 10px 0px;
+                overflow: scroll;
+                scrollbar-width: none;
+            }
+        </style>
     </head>
     <body>
         <div class="js-container"></div>
@@ -20,7 +82,7 @@
                 }
 
                 async function sendMessage() {
-                    if(isLoading||inputText===''){
+                    if (isLoading || inputText === "") {
                         return;
                     }
                     setLoading(true);
@@ -75,8 +137,9 @@
                 }
 
                 return (
-                    <>
+                    <div className="chat-input-contaier">
                         <input
+                            className="chat-input"
                             placeholder="Send a message to Chatbot"
                             size="30"
                             onChange={saveInputText}
@@ -85,43 +148,53 @@
                         />
 
                         <button
+                            className="send-button"
                             // 一旦发生点击行为 → 执行 sendMeaasge函数
                             onClick={sendMessage}>
                             Send
                         </button>
-                    </>
+                    </div>
                 );
             }
 
             // 传入一条消息 进行渲染
             function ChatMessage({ message, sender }) {
                 return (
-                    <div>
-                        <p>
-                            {sender === "robot" && (
-                                <img
-                                    width="50"
-                                    src="robot.png"
-                                />
-                            )}
-                        </p>
-                        {message}
-                        <p>
-                            {sender === "user" && (
-                                <img
-                                    width="50"
-                                    src="user.png"
-                                />
-                            )}
-                        </p>
+                    <div className={sender === "user" ? "chat-message-user" : "chat-message-robot"}>
+                        {sender === "robot" && (
+                            <img
+                                className="chat-message-profile"
+                                src="robot.png"
+                            />
+                        )}
+                        <div className="chat-message-text">{message}</div>
+                        {sender === "user" && (
+                            <img
+                                className="chat-message-profile"
+                                src="user.png"
+                            />
+                        )}
                     </div>
                 );
             }
 
             // 渲染函数 → 传入的是历史的聊天记录
             function ChatMessages({ chatMessages }) {
+                const chatMessageRef = React.useRef(null);
+
+                // TODO: 研究 自动滑动页面到最下面
+                React.useEffect(() => {
+                    const containerElem= chatMessageRef.current;
+                    if(containerElem){
+                        containerElem.scrollTop=container.scrollHeight
+                    }
+                    // console.log(chatMessageRef.current);
+                }, [chatMessages]);
+
                 return (
-                    <>
+                    <div
+                        className="chat-message-container"
+                        ref={chatMessageRef}>
                         {chatMessages.map((chatMessage) => {
                             // 将历史记录中的消息逐个渲染
                             return (
@@ -132,7 +205,7 @@
                                 />
                             );
                         })}
-                    </>
+                    </div>
                 );
             }
 
@@ -161,13 +234,16 @@
                 ]);
 
                 return (
-                    <>
+                    <div className="app-container">
+                        <ChatMessages
+                            // className='chat-mesaaaage'
+                            chatMessages={chatMessages}
+                        />
                         <ChatInput
                             chatMessages={chatMessages}
                             setChatMessages={setChatMessages}
                         />
-                        <ChatMessages chatMessages={chatMessages} />
-                    </>
+                    </div>
                 );
             }
 
@@ -176,3 +252,6 @@
         </script>
     </body>
 </html>
+
+<!-- TODO: 解决输入太长,溢出文本框的问题 -->
+<!-- TODO: 研究React的hook -->
