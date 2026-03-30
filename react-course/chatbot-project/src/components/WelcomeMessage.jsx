@@ -1,3 +1,6 @@
+import "./WelcomeMessage.css"
+
+
 export function WelcomeMessage({ chatMessages }) {
     console.log(chatMessages.length);
     if (chatMessages.length === 0) {

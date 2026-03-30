@@ -1,5 +1,6 @@
 import RobotProfileImage from "../assets/robot.png";
 import UserProfileImage from "../assets/user.png";
+import './ChatMessage.css'
 
 // 传入一条消息 进行渲染
 export function ChatMessage({ message, sender }) {

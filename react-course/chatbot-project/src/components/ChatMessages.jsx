@@ -1,5 +1,7 @@
 import { useAutoScroll } from "./useAutoScroll";
 import { ChatMessage } from "./ChatMessage";
+import "./ChatMessages.css"
+
 // 渲染函数 → 传入的是历史的聊天记录
 function ChatMessages({ chatMessages }) {
     // 创建一个 ref

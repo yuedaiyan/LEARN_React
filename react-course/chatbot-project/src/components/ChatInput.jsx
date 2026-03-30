@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Chatbot } from "supersimpledev";
 import LoadingSpinnerImage from "../assets/loading-spinner.gif";
+import './ChatInput.css';
 
 export function ChatInput({ chatMessages, setChatMessages }) {
     const [inputText, setInputText] = useState("");
@@ -39,7 +40,7 @@ export function ChatInput({ chatMessages, setChatMessages }) {
                 // message: response,
                 message: (
                     <img
-                        className="loading-img"
+                        className="chat-input-loadingImg"
                         src={LoadingSpinnerImage}
                     />
                 ),
