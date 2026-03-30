@@ -17,4 +17,6 @@
 }
 .chat-message-profile {
     width: 40px;
+    border-radius: 45px;
+    object-fit: cover;
 }

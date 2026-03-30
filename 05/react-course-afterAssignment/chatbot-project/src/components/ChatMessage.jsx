@@ -1,9 +1,10 @@
 import RobotProfileImage from "../assets/robot.png";
-import UserProfileImage from "../assets/user.png";
+import UserProfileImage from "../assets/yuedaiyan.jpg";
 import './ChatMessage.css'
 
 // 传入一条消息 进行渲染
 export function ChatMessage({ message, sender }) {
+    console.log(UserProfileImage);
     return (
         <div className={sender === "user" ? "chat-message-user" : "chat-message-robot"}>
             {sender === "robot" && (
