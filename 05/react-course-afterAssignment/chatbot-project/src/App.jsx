@@ -13,9 +13,10 @@ function App() {
     const [chatMessages, setChatMessages] = useState([]);
     useEffect(() => {
         Chatbot.addResponses({
-            "a": "aaab",
-            "b": "bbbc",
-            "c":"cccd"
+            "Yue Daiyan": "Yue Daiyan is learning React",
+            "yuedaiyan": "Yue Daiyan is learning React",
+            "good":"That's good!",
+            "shit":"That's shit!"
         })
     }, []);
     return (
