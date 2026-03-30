@@ -11,7 +11,6 @@ function ChatMessages({ chatMessages }) {
         <div
             className="chat-message-container"
             // 将 ref 挂载
-            // ref={chatMessageRef}
             ref={chatMessageRef}>
             {chatMessages.map((chatMessage) => {
                 // 将历史记录中的消息逐个渲染
@@ -20,6 +19,7 @@ function ChatMessages({ chatMessages }) {
                         message={chatMessage.message}
                         sender={chatMessage.sender}
                         key={chatMessage.id}
+                        time={chatMessage.time}
                     />
                 );
             })}

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Chatbot } from "supersimpledev";
+import dayjs from "dayjs";
 import LoadingSpinnerImage from "../assets/loading-spinner.gif";
-import './ChatInput.css';
+import "./ChatInput.css";
 
 export function ChatInput({ chatMessages, setChatMessages }) {
     const [inputText, setInputText] = useState("");
@@ -17,9 +18,8 @@ export function ChatInput({ chatMessages, setChatMessages }) {
         }
         setLoading(true);
 
-        // 首先: 情况输入框
+        // 首先: 清空输入框
         setInputText("");
-
         // 固定唯一的 robotId
         const robotId = crypto.randomUUID();
         // 先 将之前确定的消息进行拼接
@@ -28,7 +28,9 @@ export function ChatInput({ chatMessages, setChatMessages }) {
             {
                 message: inputText,
                 sender: "user",
+                time: dayjs().valueOf(),
                 id: crypto.randomUUID(),
+                
             },
         ];
         let response = "Loading…";
@@ -57,6 +59,7 @@ export function ChatInput({ chatMessages, setChatMessages }) {
             {
                 message: response,
                 sender: "robot",
+                time: dayjs().valueOf(),
                 id: robotId,
             },
         ]);
@@ -73,6 +76,10 @@ export function ChatInput({ chatMessages, setChatMessages }) {
         }
     }
 
+    // function requestTime() {
+    //     dayjs();
+    // }
+
     return (
         <div className="chat-input-contaier">
             <input
@@ -87,6 +94,7 @@ export function ChatInput({ chatMessages, setChatMessages }) {
             <button
                 className="send-button"
                 // 一旦发生点击行为 → 执行 sendMeaasge函数
+                // onClick={() => { sendMessage(); requestTime(); }}>
                 onClick={sendMessage}>
                 Send
             </button>

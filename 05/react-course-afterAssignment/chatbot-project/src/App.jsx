@@ -16,7 +16,9 @@ function App() {
             "Yue Daiyan": "Yue Daiyan is learning React",
             "yuedaiyan": "Yue Daiyan is learning React",
             "good":"That's good!",
-            "shit":"That's shit!"
+            "shit": "That's shit!",
+            "react": "Hope this is usefull.",
+            "time":"Time pass so fucking fast."
         })
     }, []);
     return (

@@ -20,3 +20,9 @@
     border-radius: 45px;
     object-fit: cover;
 }
+
+.chat-message-time {
+    color: gray;
+    padding: 10px 0px 0px 0px;
+    font-size: 15px;
+}
