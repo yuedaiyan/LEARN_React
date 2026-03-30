@@ -66,6 +66,10 @@
                 color: gray;
                 text-align: center;
             }
+            .loading-img{
+                height: 40px;
+                margin:-15px;
+            }
         </style>
     </head>
     <body>
@@ -95,8 +99,7 @@
 
                     // 固定唯一的 robotId
                     const robotId = crypto.randomUUID();
-                    // 先将 Loadding… 显示出来
-                    let response = "Loading…";
+                    // 先 将之前确定的消息进行拼接
                     const newChatMesages = [
                         ...chatMessages,
                         {
@@ -105,11 +108,14 @@
                             id: crypto.randomUUID(),
                         },
                     ];
-                    // 先将 Loadding… 显示出来
+                    let response = "Loading…";
+
+                    // 将 Loading… 显示出来
                     setChatMessages([
                         ...newChatMesages,
                         {
-                            message: response,
+                            // message: response,
+                            message:<img className='loading-img' src="loading-spinner.gif" />,
                             sender: "robot",
                             id: robotId,
                         },
