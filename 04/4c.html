@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+    <head>
+        <title>4b</title>
+        <!-- <link rel="icon" href="" /> -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link
+            rel="stylesheet"
+            href="my_habit.css" />
+        <style>
+            body {
+                padding: 30px 30px 30px 30px;
+            }
+            .buttonBasic {
+                padding: 10px 15px 10px 15px;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            .buttonONColor {
+                background-color: rgb(25, 135, 84);
+            }
+            .buttonOFFColor {
+                background-color: rgb(220, 53, 69);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="js-container"></div>
+        <script src="https://unpkg.com/supersimpledev/react.js"></script>
+        <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+        <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+        <script type="text/babel">
+            function App() {
+                const [isButtonOn, setButton] = React.useState(false);
+
+                function buttonClick() {
+                    // isButtonOn = !isButtonOn;
+                    if (!isButtonOn) {
+                        setButton(true);
+                    } else if (isButtonOn) {
+                        setButton(false);
+                    }
+                }
+
+                return (
+                    <button
+                        className={`buttonBasic ${isButtonOn ? "buttonOFFColor":"buttonONColor"}`}
+
+                        onClick={buttonClick}>
+                        {isButtonOn ? "OFF" : "ON"}
+                    </button>
+                );
+            }
+            const container = document.querySelector(".js-container");
+            ReactDOM.createRoot(container).render(<App />);
+        </script>
+    </body>
+</html>
