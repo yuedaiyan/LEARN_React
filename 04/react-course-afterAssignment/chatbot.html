@@ -66,9 +66,9 @@
                 color: gray;
                 text-align: center;
             }
-            .loading-img{
+            .loading-img {
                 height: 40px;
-                margin:-15px;
+                margin: -15px;
             }
         </style>
     </head>
@@ -115,7 +115,12 @@
                         ...newChatMesages,
                         {
                             // message: response,
-                            message:<img className='loading-img' src="loading-spinner.gif" />,
+                            message: (
+                                <img
+                                    className="loading-img"
+                                    src="loading-spinner.gif"
+                                />
+                            ),
                             sender: "robot",
                             id: robotId,
                         },
@@ -190,20 +195,16 @@
             // 渲染函数 → 传入的是历史的聊天记录
             function ChatMessages({ chatMessages }) {
                 // 创建一个 ref
-                const chatMessageRef = React.useRef(null);
-
-                React.useEffect(() => {
-                    const containerElem = chatMessageRef.current;
-                    if (containerElem) {
-                        containerElem.scrollTop = containerElem.scrollHeight;
-                    }
-                }, [chatMessages]);
+                // const chatMessageRef = React.useRef(null);
+                const chatMessageRef = useAutoScroll([chatMessages]);
 
                 return (
                     <div
                         className="chat-message-container"
                         // 将 ref 挂载
-                        ref={chatMessageRef}>
+                        // ref={chatMessageRef}
+                        ref={chatMessageRef}
+                        >
                         {chatMessages.map((chatMessage) => {
                             // 将历史记录中的消息逐个渲染
                             return (
@@ -217,11 +218,26 @@
                     </div>
                 );
             }
+
             function WelcomeMessage({ chatMessages }) {
                 console.log(chatMessages.length);
                 if (chatMessages.length === 0) {
                     return <p className="welcome-message">Welcome to the chatbot project! Send a message using the textbox below.</p>;
                 }
+            }
+
+            // 自制 hook
+            function useAutoScroll(dependencies) {
+                const chatMessageRef = React.useRef(null);
+
+                React.useEffect(() => {
+                    const containerElem = chatMessageRef.current;
+                    if (containerElem) {
+                        containerElem.scrollTop = containerElem.scrollHeight;
+                    }
+                }, dependencies);
+
+                return chatMessageRef
             }
 
             function App() {
