@@ -1,5 +1,6 @@
 // 层级一: 导入 包
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Chatbot } from "supersimpledev";
 // 层级二: 导入 .jsx 文件
 import { ChatInput } from "./components/ChatInput";
 import ChatMessages from "./components/ChatMessages";
@@ -10,7 +11,13 @@ import "./App.css";
 
 function App() {
     const [chatMessages, setChatMessages] = useState([]);
-
+    useEffect(() => {
+        Chatbot.addResponses({
+            "a": "aaab",
+            "b": "bbbc",
+            "c":"cccd"
+        })
+    }, []);
     return (
         <div className="app-container">
             <ChatMessages
