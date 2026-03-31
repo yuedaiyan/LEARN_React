@@ -56,3 +56,4 @@ function Header() {
     );
 }
 export default Header;
+// TODO: 右上角的购物车按钮没有显示 3 ,这与老师的不一样
