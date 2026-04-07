@@ -12,9 +12,12 @@ function App() {
     // 将 cart 提升到最高处,防止在不同页面重复加载 cart
     const [cart, setCart] = useState([]);
     useEffect(() => {
-        axios.get("/api/cart-items?expand=product").then((response) => {
+        const fetchAppData = async () => {
+            const response = await axios.get("/api/cart-items?expand=product");
             setCart(response.data);
-        });
+        };
+
+        fetchAppData();
     }, []);
 
     return (

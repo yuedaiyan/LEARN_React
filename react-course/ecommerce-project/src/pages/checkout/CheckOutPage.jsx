@@ -12,14 +12,17 @@ function CheckOutPage({ cart }) {
     const [paymentSummary, setPaymentSummary] = useState([]);
 
     useEffect(() => {
-        // 使用axios,获得当前时间下的三种快递状态
-        axios.get("/api/delivery-options?expand=estimatedDeliveryTime").then((response) => {
+        const fetchCheckoutData = async () => {
+            let response;
+            // 使用axios,获得当前时间下的三种快递状态
+            response = await axios.get("/api/delivery-options?expand=estimatedDeliveryTime");
             setDeliveryOptiions(response.data);
-        });
-        // 使用axios,获取当前时间下 右侧结算 相关的信息
-        axios.get("/api/payment-summary").then((response) => {
+            // 使用axios,获取当前时间下 右侧结算 相关的信息
+            response = await axios.get("/api/payment-summary");
             setPaymentSummary(response.data);
-        });
+        };
+
+        fetchCheckoutData();
     }, []);
 
     // console.log("deliveryOptions:\n", response.data);

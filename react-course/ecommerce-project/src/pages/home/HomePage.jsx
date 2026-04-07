@@ -10,10 +10,11 @@ function HomePage({ cart }) {
 
     // 使用 useEffect,仅渲染一次
     useEffect(() => {
-        // 通过后端请求 商品列表
-        axios.get("/api/products").then((response) => {
+        const getHomeData = async () => {
+            const response = await axios.get("/api/products");
             setPorducts(response.data);
-        });
+        };
+        getHomeData();
     }, []);
 
     return (
@@ -25,7 +26,6 @@ function HomePage({ cart }) {
                 href="home-favicon.png"
             />
 
-            {/* 组件化 */}
             <Header cart={cart} />
 
             <div className="home-page">
@@ -36,3 +36,4 @@ function HomePage({ cart }) {
 }
 
 export default HomePage;
+// TODO:解决async await函数的返回值问题
