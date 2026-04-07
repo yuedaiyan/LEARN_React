@@ -1,9 +1,9 @@
 import dayjs from "dayjs";
 import axios from "axios";
 import { Link } from "react-router";
-import formatMoney from "../utils/money";
+import formatMoney from "../../utils/money";
 import { useState, useEffect, Fragment } from "react";
-import Header from "../components/Header";
+import Header from "../../components/Header";
 import "./OrdersPage.css";
 
 function OrdersPage({ cart }) {
@@ -16,7 +16,7 @@ function OrdersPage({ cart }) {
         });
     }, []);
 
-    console.log("orders:\n", orders);
+    // console.log("orders:\n", orders);
 
     return (
         <>
