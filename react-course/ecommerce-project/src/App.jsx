@@ -8,6 +8,7 @@ import "./App.css";
 
 function App() {
     return (
+        // Routes + Route 解决浏览器刷新的问题(通过url中的path标签,选择具体要进入的element)
         <Routes>
             <Route
                 index
