@@ -11,10 +11,10 @@ function HomePage() {
     // 使用 useEffect,仅渲染一次
     useEffect(() => {
         // 通过后端请求 商品列表
-        axios.get("http://localhost:3000/api/products").then((response) => {
+        axios.get("/api/products").then((response) => {
             setPorducts(response.data);
         });
-        axios.get("http://localhost:3000/api/cart-items").then((response) => {
+        axios.get("/api/cart-items").then((response) => {
             setCart(response.data)
         });
     }, []);
