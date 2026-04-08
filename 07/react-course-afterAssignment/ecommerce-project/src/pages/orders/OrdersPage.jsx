@@ -10,9 +10,10 @@ function OrdersPage({ cart }) {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
-        axios.get("/api/orders?expand=products").then((response) => {
+        (async () => {
+            const response = await axios.get("/api/orders?expand=products");
             setOrders(response.data);
-        });
+        })();
     }, []);
     // console.log("orders:\n", orders);
 
@@ -64,8 +65,8 @@ function OrdersPage({ cart }) {
 
                                                 <div className="product-details">
                                                     <div className="product-name">{orderProduct.product.name}</div>
-                                                    <div className="product-delivery-date">{dayjs(orderProduct.estimatedDeliveryTimeMs).format('MMMM D')}</div>
-                                                    <div className="product-quantity">Quantity: { orderProduct.quantity}</div>
+                                                    <div className="product-delivery-date">{dayjs(orderProduct.estimatedDeliveryTimeMs).format("MMMM D")}</div>
+                                                    <div className="product-quantity">Quantity: {orderProduct.quantity}</div>
                                                     <button className="buy-again-button button-primary">
                                                         <img
                                                             className="buy-again-icon"

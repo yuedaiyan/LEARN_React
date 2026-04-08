@@ -47,5 +47,3 @@ function App() {
     );
 }
 export default App;
-
-// TODO: 解决参数传递的时候,为什么要使用{}括住解析的问题
