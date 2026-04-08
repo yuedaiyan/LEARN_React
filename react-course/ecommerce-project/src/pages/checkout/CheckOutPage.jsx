@@ -5,7 +5,7 @@ import PaymentSummary from "./PaymentSummary";
 import { useState, useEffect } from "react";
 import "./CheckOutPage.css";
 
-function CheckOutPage({ cart ,loadCart}) {
+function CheckOutPage({ cart, loadCart }) {
     // 数据源于后端,用于储存"寄送相关数据"的状态,按照当前的时间,计算出三种快递套餐所带来的三种快递状态
     const [deliveryOptions, setDeliveryOptiions] = useState([]);
     // 数据源于后端,用于储存下单界面中的 右侧结算 相关信息
@@ -27,7 +27,6 @@ function CheckOutPage({ cart ,loadCart}) {
 
         fetchCheckoutData();
     }, [cart]);
-
 
     // console.log("deliveryOptions:\n", response.data);
     // console.log("cart:\n", cart);
@@ -54,7 +53,10 @@ function CheckOutPage({ cart ,loadCart}) {
                         loadCart={loadCart}
                     />
 
-                    <PaymentSummary paymentSummary={paymentSummary} />
+                    <PaymentSummary
+                        paymentSummary={paymentSummary}
+                        loadCart={loadCart}
+                    />
                 </div>
             </div>
         </>

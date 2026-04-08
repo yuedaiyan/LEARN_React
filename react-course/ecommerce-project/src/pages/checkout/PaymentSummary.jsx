@@ -1,6 +1,18 @@
+import axios from "axios";
+import { useNavigate, useParams } from "react-router";
 import formatMoney from "../../utils/money";
 
-function PaymentSummary({ paymentSummary }) {
+function PaymentSummary({ paymentSummary, loadCart }) {
+    const navigate = useNavigate();
+
+    const createOrder = async () => {
+        await axios.post("/api/orders");
+        await loadCart();
+        // 下单之后,跳转至 清单状态(order) 页面
+        navigate("/orders");
+    };
+useNavigate('/orders')
+
     return (
         <div className="payment-summary">
             <div className="payment-summary-title">Payment Summary</div>
@@ -33,7 +45,11 @@ function PaymentSummary({ paymentSummary }) {
                         <div className="payment-summary-money">{formatMoney(paymentSummary.totalCostCents)}</div>
                     </div>
 
-                    <button className="place-order-button button-primary">Place your order</button>
+                    <button
+                        className="place-order-button button-primary"
+                        onClick={createOrder}>
+                        Place your order
+                    </button>
                 </>
             )}
         </div>
