@@ -25,13 +25,13 @@ function TrackingPage({ cart }) {
 
     // console.log('-d order:\n',order);
     // console.log('-d order.products:\n',order.products);
-    const productFetch = order.products.find((product) => {
+    const orderProduct = order.products.find((product) => {
         if (product.productId === productId) {
             return product;
         }
     });
     console.log("-d productId of this:\n", productId);
-    console.log("-d product fetch:\n", productFetch);
+    console.log("-d orderProduct:\n", orderProduct);
 
     return (
         <>
@@ -52,15 +52,16 @@ function TrackingPage({ cart }) {
                         View all orders
                     </Link>
 
-                    <div className="delivery-date">Arriving on Monday, June 13</div>
+                    {/*  */}
+                    <div className="delivery-date">Arriving on { dayjs(orderProduct.estimatedDeliveryTimeMs).format('dddd, MMMM D')}</div>
 
-                    <div className="product-info">Black and Gray Athletic Cotton Socks - 6 Pairs</div>
+                    <div className="product-info">{ orderProduct.product.name}</div>
 
-                    <div className="product-info">Quantity: 1</div>
+                    <div className="product-info">Quantity: { orderProduct.quantity}</div>
 
                     <img
                         className="product-image"
-                        src="images/products/athletic-cotton-socks-6-pairs.jpg"
+                        src={orderProduct.product.image}
                     />
 
                     <div className="progress-labels-container">
@@ -72,6 +73,8 @@ function TrackingPage({ cart }) {
                     <div className="progress-bar-container">
                         <div className="progress-bar"></div>
                     </div>
+                    {/*  */}
+
                 </div>
             </div>
         </>
