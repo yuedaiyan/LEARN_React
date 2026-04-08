@@ -1,7 +1,7 @@
 import formatMoney from "../../utils/money";
 
 function CartItemDetials({ cartItem }) {
-    console.log('cartItem:\n',cartItem);
+    // console.log('cartItem:\n',cartItem);
     return (
         <>
             <img

@@ -2,7 +2,7 @@ import DeliveryOptions from "./DeliveryOptions";
 import CartItemDetials from "./CartItemDetails";
 import DeliveryDate from "./DeliveryDate";
 
-function OrderSummary({ deliveryOptions, cart }) {
+function OrderSummary({ deliveryOptions, cart ,loadCart}) {
     return (
         <div className="order-summary">
             {/* 检测当前是否存在订单 → 确定存在订单,渲染左侧商品详情模块 */}
@@ -23,6 +23,7 @@ function OrderSummary({ deliveryOptions, cart }) {
                                 <DeliveryOptions
                                     cartItem={cartItem}
                                     deliveryOptions={deliveryOptions}
+                                    loadCart={loadCart}
                                 />
                             </div>
                         </div>
