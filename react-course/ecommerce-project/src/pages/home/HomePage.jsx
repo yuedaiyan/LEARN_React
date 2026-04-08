@@ -8,11 +8,10 @@ function HomePage({ cart }) {
     const [products, setPorducts] = useState([]);
 
     useEffect(() => {
-        const getHomeData = async () => {
+        (async () => {
             const response = await axios.get("/api/products");
             setPorducts(response.data);
-        };
-        getHomeData();
+        })();
     }, []);
 
     return (
@@ -32,5 +31,5 @@ function HomePage({ cart }) {
         </>
     );
 }
+
 export default HomePage;
-// TODO:解决async await函数的返回值问题

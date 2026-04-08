@@ -5,7 +5,7 @@ function PaymentSummary({ paymentSummary }) {
         <div className="payment-summary">
             <div className="payment-summary-title">Payment Summary</div>
 
-            {/* 用于检查payment-summary是不是存在,如果不存在就就不渲染右侧的结算模块 */}
+            {/* 用于检查payment-summary是否存在 → 确定存在后,渲染右侧结算模块 */}
             {paymentSummary && (
                 <>
                     <div className="payment-summary-row">

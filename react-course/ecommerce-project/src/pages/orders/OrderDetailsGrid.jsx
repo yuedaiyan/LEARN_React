@@ -28,7 +28,6 @@ function OrderDetailsGrid({ order }) {
                         </div>
 
                         <div className="product-actions">
-                            {/* TODO: react 有时候使用{}进行函数,有时候使用${}进行函数,区别在哪里? */}
                             <Link to={`/tracking/${order.id}/${orderProduct.productId}`}>
                                 <button className="track-package-button button-secondary">Track package</button>
                             </Link>

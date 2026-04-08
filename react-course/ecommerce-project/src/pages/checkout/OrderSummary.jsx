@@ -5,8 +5,7 @@ import DeliveryDate from "./DeliveryDate";
 function OrderSummary({ deliveryOptions, cart }) {
     return (
         <div className="order-summary">
-            {/* 检查deliveryOptions是否存在,存在的话,才可以执行.find() */}
-            {/* TODO: 不应该确定存在吗?不存在的话,应该解决问题啊! */}
+            {/* 检测当前是否存在订单 → 确定存在订单,渲染左侧商品详情模块 */}
             {deliveryOptions.length > 0 &&
                 cart.map((cartItem) => {
                     const selectedDeliveryOption = deliveryOptions.find((deliveryOption) => {
@@ -32,5 +31,5 @@ function OrderSummary({ deliveryOptions, cart }) {
         </div>
     );
 }
+
 export default OrderSummary;
-// TODO: 解决{} 和${}搞混的问题
