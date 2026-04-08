@@ -3,11 +3,11 @@ import { Link } from "react-router";
 import { Fragment } from "react";
 
 function OrderDetailsGrid({ order }) {
-    // console.log('-c order:\n',order);
+    // console.log('-d order:\n',order);
     return (
         <div className="order-details-grid">
             {order.products.map((orderProduct) => {
-                // console.log('-c orderProduct:\n',orderProduct);
+                // console.log('-d orderProduct:\n',orderProduct);
                 return (
                     <Fragment key={orderProduct.product.id}>
                         <div className="product-image-container">

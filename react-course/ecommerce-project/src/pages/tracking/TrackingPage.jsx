@@ -13,7 +13,6 @@ function TrackingPage({ cart }) {
     useEffect(() => {
         (async () => {
             const response = await axios.get(`/api/orders/${orderId}?expand=products`);
-            // console.log("-d response.data:\n", response.data);
             setOrder(response.data);
         })();
     }, [orderId]);
