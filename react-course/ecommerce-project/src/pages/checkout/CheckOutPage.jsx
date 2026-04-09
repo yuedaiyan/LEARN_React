@@ -11,21 +11,20 @@ function CheckOutPage({ cart, loadCart }) {
     // 数据源于后端,用于储存下单界面中的 右侧结算 相关信息
     const [paymentSummary, setPaymentSummary] = useState([]);
 
+    // 使用axios,获得当前时间下的三种快递状态
     useEffect(() => {
-        const fetchCheckoutData = async () => {
-            let response;
-
-            // 使用axios,获得当前时间下的三种快递状态
-            response = await axios.get("/api/delivery-options?expand=estimatedDeliveryTime");
+        (async () => {
+            const response = await axios.get("/api/delivery-options?expand=estimatedDeliveryTime");
             setDeliveryOptiions(response.data);
+        })();
+    }, []);
 
-            // TODO: 依赖[cart]的刷新,实际上只影响羡慕的这个.get,所以这里应该将上面的get拆分出去
-            // 使用axios,获取当前时间下 右侧结算 相关的信息
-            response = await axios.get("/api/payment-summary");
+    // 使用axios,获取当前时间下 右侧结算 相关的信息
+    useEffect(() => {
+        (async () => {
+            const response = await axios.get("/api/payment-summary");
             setPaymentSummary(response.data);
-        };
-
-        fetchCheckoutData();
+        })();
     }, [cart]);
 
     // console.log("deliveryOptions:\n", response.data);

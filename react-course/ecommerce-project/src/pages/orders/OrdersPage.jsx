@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import OrdersGrid from "./OrdersGrid";
 import "./OrdersPage.css";
 
-function OrdersPage({ cart }) {
+function OrdersPage({ cart, loadCart }) {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
@@ -29,10 +29,13 @@ function OrdersPage({ cart }) {
             <div className="orders-page">
                 <div className="page-title">Your Orders</div>
 
-                <OrdersGrid orders={orders} />
+                <OrdersGrid
+                    orders={orders}
+                    loadCart={loadCart}
+                />
             </div>
         </>
     );
 }
 export default OrdersPage;
-// TODO: 各个页面共用一个 Header 的情况下,解决购物车状态传入的问题
+// TODO: 复杂问题,最后处理 → 各个页面共用一个 Header 的情况下,解决购物车状态传入的问题: Context API	跨多个页面/组件共享同一状态

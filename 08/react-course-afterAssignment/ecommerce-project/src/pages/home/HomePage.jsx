@@ -43,4 +43,4 @@ function HomePage({ cart, loadCart }) {
 }
 
 export default HomePage;
-// TODO: 搜索框添加 enter 交互
+// TODO: 搜索框添加 Enter 交互

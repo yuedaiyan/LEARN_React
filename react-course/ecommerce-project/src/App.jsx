@@ -8,6 +8,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
 
+// chrome 控制台命令:恢复购物车至初始状态
+// axios.post('/api/reset')
+window.axios = axios;
+
 function App() {
     // 将 cart 提升到最高处,防止在不同页面重复加载 cart
     const [cart, setCart] = useState([]);
@@ -36,11 +40,21 @@ function App() {
             />
             <Route
                 path="checkout"
-                element={<CheckOutPage cart={cart} loadCart={loadCart} />}
+                element={
+                    <CheckOutPage
+                        cart={cart}
+                        loadCart={loadCart}
+                    />
+                }
             />
             <Route
                 path="orders"
-                element={<OrdersPage cart={cart} />}
+                element={
+                    <OrdersPage
+                        cart={cart}
+                        loadCart={loadCart}
+                    />
+                }
             />
             <Route
                 path="tracking/:orderId/:productId"

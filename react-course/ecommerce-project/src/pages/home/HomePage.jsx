@@ -1,18 +1,25 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router";
 import Header from "../../components/Header";
 import ProductsGrid from "./ProductsGrid";
 import "./HomePage.css";
 
 function HomePage({ cart, loadCart }) {
-    const [products, setPorducts] = useState([]);
+    const [searchParams] = useSearchParams();
+    const search = searchParams.get("search") || "";
 
+    console.log("search in homePage:\n", search);
+
+    const [products, setPorducts] = useState([]);
     useEffect(() => {
         (async () => {
-            const response = await axios.get("/api/products");
+            const url = search ? `/api/products?search=${search}` : "/api/products";
+            console.log(url);
+            const response = await axios.get(url);
             setPorducts(response.data);
         })();
-    }, []);
+    }, [search]);
 
     return (
         <>
@@ -36,3 +43,4 @@ function HomePage({ cart, loadCart }) {
 }
 
 export default HomePage;
+// TODO: 搜索框添加 Enter 交互

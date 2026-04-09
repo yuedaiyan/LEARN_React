@@ -1,22 +1,32 @@
-import { NavLink } from "react-router";
-import "./Header.css";
+import { NavLink, useNavigate } from "react-router";
+import { useSearchParams } from "react-router";
 import MobileLogoWhite from "../assets/images/mobile-logo-white.png";
 import LogoWhite from "../assets/images/logo-white.png";
+import { useState } from "react";
+import "./Header.css";
 
 // 从props中获取cart对象,之后会从中求得商品总数
 function Header({ cart }) {
+    const navigate = useNavigate();
     let totalQuantity = 0;
 
-    cart.forEach((cartItem) => {
+    cart.forEach(cartItem => {
         totalQuantity += cartItem.quantity;
     });
+
+    const [searchParams] = useSearchParams();
+    const searchText = searchParams.get("search");
+    const [search, setSearch] = useState(searchText || "");
+
+    console.log("search in Header:\n", search);
 
     return (
         <div className="header">
             <div className="left-section">
                 <NavLink
                     to="/"
-                    className="header-link">
+                    className="header-link"
+                >
                     <img
                         className="logo"
                         src={LogoWhite}
@@ -33,9 +43,20 @@ function Header({ cart }) {
                     className="search-bar"
                     type="text"
                     placeholder="Search"
+                    defaultValue={search}
+                    onChange={event => {
+                        // searchText = event.target.value;
+                        setSearch(event.target.value);
+                    }}
                 />
 
-                <button className="search-button">
+                <button
+                    className="search-button"
+                    onClick={() => {
+                        console.log(search);
+                        navigate(`/?search=${search}`);
+                    }}
+                >
                     <img
                         className="search-icon"
                         src="images/icons/search-icon.png"
@@ -46,13 +67,15 @@ function Header({ cart }) {
             <div className="right-section">
                 <NavLink
                     className="orders-link header-link"
-                    to="/orders">
+                    to="/orders"
+                >
                     <span className="orders-text">Orders</span>
                 </NavLink>
 
                 <NavLink
                     className="cart-link header-link"
-                    to="/checkout">
+                    to="/checkout"
+                >
                     <img
                         className="cart-icon"
                         src="images/icons/cart-icon.png"
