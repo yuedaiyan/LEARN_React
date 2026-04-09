@@ -1,17 +1,24 @@
 import { NavLink, useNavigate } from "react-router";
-import "./Header.css";
+import { useSearchParams } from "react-router";
 import MobileLogoWhite from "../assets/images/mobile-logo-white.png";
 import LogoWhite from "../assets/images/logo-white.png";
+import { useState } from "react";
+import "./Header.css";
 
 // 从props中获取cart对象,之后会从中求得商品总数
 function Header({ cart }) {
     const navigate = useNavigate();
     let totalQuantity = 0;
-    let searchText;
 
     cart.forEach(cartItem => {
         totalQuantity += cartItem.quantity;
     });
+
+    const [searchParams] = useSearchParams();
+    const searchText = searchParams.get("search");
+    const [search, setSearch] = useState(searchText || "");
+
+    console.log("search in Header:\n", search);
 
     return (
         <div className="header">
@@ -36,16 +43,18 @@ function Header({ cart }) {
                     className="search-bar"
                     type="text"
                     placeholder="Search"
+                    defaultValue={search}
                     onChange={event => {
-                        searchText = event.target.value;
+                        // searchText = event.target.value;
+                        setSearch(event.target.value);
                     }}
                 />
 
                 <button
                     className="search-button"
                     onClick={() => {
-                        console.log(searchText);
-                        navigate(`/?search=${searchText}`);
+                        console.log(search);
+                        navigate(`/?search=${search}`);
                     }}
                 >
                     <img
