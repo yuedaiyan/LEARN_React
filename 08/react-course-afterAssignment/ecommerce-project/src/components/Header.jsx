@@ -1,10 +1,11 @@
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import "./Header.css";
 import MobileLogoWhite from "../assets/images/mobile-logo-white.png";
 import LogoWhite from "../assets/images/logo-white.png";
 
 // 从props中获取cart对象,之后会从中求得商品总数
 function Header({ cart }) {
+    const navigate = useNavigate();
     let totalQuantity = 0;
     let searchText;
 
@@ -44,6 +45,7 @@ function Header({ cart }) {
                     className="search-button"
                     onClick={() => {
                         console.log(searchText);
+                        navigate(`/?search=${searchText}`);
                     }}
                 >
                     <img
