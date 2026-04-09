@@ -21,10 +21,10 @@ function CheckOutPage({ cart, loadCart }) {
 
     // 使用axios,获取当前时间下 右侧结算 相关的信息
     useEffect(() => {
-        async () => {
+        (async () => {
             const response = await axios.get("/api/payment-summary");
             setPaymentSummary(response.data);
-        };
+        })();
     }, [cart]);
 
     // console.log("deliveryOptions:\n", response.data);

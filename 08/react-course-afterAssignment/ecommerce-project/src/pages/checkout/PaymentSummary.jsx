@@ -11,7 +11,7 @@ function PaymentSummary({ paymentSummary, loadCart }) {
         // 下单之后,跳转至 清单状态(order) 页面
         navigate("/orders");
     };
-useNavigate('/orders')
+    useNavigate("/orders");
 
     return (
         <div className="payment-summary">
@@ -47,7 +47,8 @@ useNavigate('/orders')
 
                     <button
                         className="place-order-button button-primary"
-                        onClick={createOrder}>
+                        onClick={createOrder}
+                    >
                         Place your order
                     </button>
                 </>

@@ -3,8 +3,8 @@ import { useState } from "react";
 import formatMoney from "../../utils/money";
 
 function CartItemDetials({ cartItem, loadCart }) {
-    // console.log('cartItem:\n',cartItem);
     const [isQuantityUpdate, setIsQuantityUpdate] = useState(false);
+    const [quantity, setQuantity] = useState(cartItem.quantity);
 
     // 后端删除方法
     const deleteCartItem = async () => {
@@ -24,12 +24,17 @@ function CartItemDetials({ cartItem, loadCart }) {
                 <div className="product-price">{formatMoney(cartItem.product.priceCents)}</div>
                 <div className="product-quantity">
                     <span>
-                        Quantity:{" "}
+                        Quantity: {/* 只有在 isQuantityUpdate为真的时候,才可以显示输入框 */}
                         <span className="quantity-label">
                             {isQuantityUpdate && (
                                 <input
                                     className="quantity-input"
                                     type="text"
+                                    vlaue={quantity}
+                                    onChange={event => {
+                                        // console.log(event.target.value);
+                                        setQuantity(Number(event.target.value));
+                                    }}
                                 />
                             )}
                             {cartItem.quantity}
@@ -37,7 +42,16 @@ function CartItemDetials({ cartItem, loadCart }) {
                     </span>
                     <span
                         className="update-quantity-link link-primary"
-                        onClick={() => {
+                        onClick={async () => {
+                            // 如果 isQuantityUpdate 为真(代表已经打开了更新数量输入框),再次点击update,更新后端(更新完成之后,将 isQuantityUpdate的状态取反)
+                            if (isQuantityUpdate) {
+                                await axios.put(`/api/cart-items/${cartItem.productId}`, {
+                                    // 缩写 quantity: quantity,
+                                    quantity,
+                                });
+                                await loadCart();
+                            }
+
                             setIsQuantityUpdate(!isQuantityUpdate);
                         }}
                     >
