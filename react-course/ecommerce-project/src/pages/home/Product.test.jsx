@@ -1,6 +1,10 @@
 import { it, expect, describe, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import Product from "./Product";
+// 劫持整个axios库
+import axios from "axios";
+vi.mock("axios");
 
 describe("Product component", () => {
     it("deisplays the product details correctly", () => {
@@ -20,6 +24,7 @@ describe("Product component", () => {
         // 劫持后端
         const loadCart = vi.fn();
 
+        // 虚假渲染
         render(
             <Product
                 product={product}
@@ -39,4 +44,57 @@ describe("Product component", () => {
         // 检测:评分人数是否正确
         expect(screen.getByText("87")).toBeInTheDocument();
     });
+
+    it("adds a product to the cart", async () => {
+        // 劫持传入商品信息
+        const product = {
+            id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+            image: "images/products/athletic-cotton-socks-6-pairs.jpg",
+            name: "Black and Gray Athletic Cotton Socks - 6 Pairs",
+            rating: {
+                stars: 4.5,
+                count: 87,
+            },
+            priceCents: 1090,
+            keywords: ["socks", "sports", "apparel"],
+        };
+
+        // 劫持后端
+        const loadCart = vi.fn();
+
+        // 虚假渲染
+        render(
+            <Product
+                product={product}
+                loadCart={loadCart}
+            />,
+        );
+
+        // 初始化:模拟点击库
+        const user = userEvent.setup();
+        // 获得 添加到购物车 按钮
+        const addToCartButton = screen.getByTestId("add-to-cart-button");
+        // 点击 添加到购物车
+        await user.click(addToCartButton);
+
+        // 检测:发送到后端的请求中是否包含指定内容
+        expect(axios.post).toHaveBeenCalledWith("/api/cart-items", {
+            productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+            quantity: 1,
+        });
+        // 检测:是否调用了 loadCart()
+        expect(loadCart).toHaveBeenCalled;
+    });
 });
+
+// const product = {
+//     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+//     image: "images/products/athletic-cotton-socks-6-pairs.jpg",
+//     name: "Black and Gray Athletic Cotton Socks - 6 Pairs",
+//     rating: {
+//         stars: 4.5,
+//         count: 87,
+//     },
+//     priceCents: 1090,
+//     keywords: ["socks", "sports", "apparel"],
+// };
