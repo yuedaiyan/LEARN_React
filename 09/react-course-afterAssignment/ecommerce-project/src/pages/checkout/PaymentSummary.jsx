@@ -62,6 +62,7 @@ function PaymentSummary({ paymentSummary, loadCart }) {
 
                     <button
                         className="place-order-button button-primary"
+                        data-testid="place-order-button"
                         onClick={createOrder}
                     >
                         Place your order

@@ -44,9 +44,8 @@ describe("HomePage component", () => {
                 };
             }
         });
-    });
+    
 
-    it("displays the products correct", async () => {
         render(
             // 因为Homepage里面有Header,Header里面有Link,所以必须使用Router包裹
             <MemoryRouter>
@@ -57,6 +56,10 @@ describe("HomePage component", () => {
                 ,
             </MemoryRouter>,
         );
+
+    });
+
+    it("displays the products correct", async () => {
 
         // find可以等到异步结束,一直等,直到直到位置
         const productContainers = await screen.findAllByTestId("product-container");
@@ -70,15 +73,6 @@ describe("HomePage component", () => {
     });
 
     it("Add to Cart buttons work", async () => {
-        render(
-            // 因为Homepage里面有Header,Header里面有Link,所以必须使用Router包裹
-            <MemoryRouter>
-                <HomePage
-                    cart={[]}
-                    loadCart={loadCart}
-                />
-            </MemoryRouter>,
-        );
         const user = userEvent.setup();
         const productContainers = await screen.findAllByTestId("product-container");
 

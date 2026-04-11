@@ -30,9 +30,7 @@ describe("Product component", () => {
 
         // 初始化:模拟用户交互
         user = userEvent.setup();
-    });
 
-    it("deisplays the product details correctly", () => {
         // 虚假渲染
         render(
             <Product
@@ -40,6 +38,9 @@ describe("Product component", () => {
                 loadCart={loadCart}
             />,
         );
+    });
+
+    it("deisplays the product details correctly", () => {
         // 检测:是否正确显示文字
         expect(screen.getByText("Black and Gray Athletic Cotton Socks - 6 Pairs")).toBeInTheDocument();
         expect(screen.getByText("$10.90")).toBeInTheDocument();
@@ -55,13 +56,13 @@ describe("Product component", () => {
     });
 
     it("adds a product to the cart", async () => {
-        // 虚假渲染
-        render(
-            <Product
-                product={product}
-                loadCart={loadCart}
-            />,
-        );
+        // // 虚假渲染
+        // render(
+        //     <Product
+        //         product={product}
+        //         loadCart={loadCart}
+        //     />,
+        // );
         // 获得 添加到购物车 按钮
         const addToCartButton = screen.getByTestId("add-to-cart-button");
         // 点击 添加到购物车
@@ -77,14 +78,6 @@ describe("Product component", () => {
     });
 
     it("select a quantity (1)", async () => {
-        // 虚假渲染
-        render(
-            <Product
-                product={product}
-                loadCart={loadCart}
-            />,
-        );
-
         const quantityselector = screen.getByTestId("product-quantity-containe");
 
         // 检测:初始状态是否为1
