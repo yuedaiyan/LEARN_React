@@ -44,9 +44,8 @@ describe("HomePage component", () => {
                 };
             }
         });
-    });
+    
 
-    it("displays the products correct", async () => {
         render(
             // 因为Homepage里面有Header,Header里面有Link,所以必须使用Router包裹
             <MemoryRouter>
@@ -58,6 +57,10 @@ describe("HomePage component", () => {
             </MemoryRouter>,
         );
 
+    });
+
+    it("displays the products correct", async () => {
+
         // find可以等到异步结束,一直等,直到直到位置
         const productContainers = await screen.findAllByTestId("product-container");
 
@@ -67,5 +70,33 @@ describe("HomePage component", () => {
         // 测试:商品的名称
         expect(within(productContainers[0]).getByText("Black and Gray Athletic Cotton Socks - 6 Pairs")).toBeInTheDocument();
         expect(within(productContainers[1]).getByText("Intermediate Size Basketball")).toBeInTheDocument();
+    });
+
+    it("Add to Cart buttons work", async () => {
+        const user = userEvent.setup();
+        const productContainers = await screen.findAllByTestId("product-container");
+
+        // 点击:第一个商品 Add to Cart
+        const addToCartbutton1 = within(productContainers[0]).getByTestId("add-to-cart-button");
+        const quantityselector1 = within(productContainers[0]).getByTestId("product-quantity-containe");
+        await user.selectOptions(quantityselector1, "2");
+        await user.click(addToCartbutton1);
+        expect(axios.post).toHaveBeenNthCalledWith(1, "/api/cart-items", {
+            productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+            quantity: 2,
+        });
+
+        // 点击:第二个商品 Add to Cart
+        const addToCartbutton2 = within(productContainers[1]).getByTestId("add-to-cart-button");
+        const quantityselector2 = within(productContainers[1]).getByTestId("product-quantity-containe");
+        await user.selectOptions(quantityselector2, "3");
+        await user.click(addToCartbutton2);
+        expect(axios.post).toHaveBeenNthCalledWith(2, "/api/cart-items", {
+            productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
+            quantity: 3,
+        });
+
+        // 检测是不是更新了两次购物车
+        expect(loadCart).toHaveBeenCalledTimes(2);
     });
 });
