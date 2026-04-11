@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect, useRef } from "react";
 import formatMoney from "../../utils/money";
 
+// 功能: 渲染主页上的一个具体的商品
 function Product({ product, loadCart }) {
     const [quantity, setQuantity] = useState(1);
     const [added, setAdded] = useState(false);
@@ -38,7 +39,7 @@ function Product({ product, loadCart }) {
         await loadCart();
     };
 
-    const selectQuantity = (event) => {
+    const selectQuantity = event => {
         // console.log("event.target:\n", event.target);
         // console.log("event.target.value:\n", event.target.value);
         const quantitySelected = Number(event.target.value);
@@ -50,6 +51,8 @@ function Product({ product, loadCart }) {
             <div className="product-image-container">
                 <img
                     className="product-image"
+                    // 用于 vitest 图像测试
+                    data-testid="product-image"
                     src={product.image}
                 />
             </div>
@@ -59,6 +62,8 @@ function Product({ product, loadCart }) {
             <div className="product-rating-container">
                 <img
                     className="product-rating-stars"
+                    // 用于 vitest 图像测试
+                    data-testid="product-rating-stars"
                     src={`images/ratings/rating-${product.rating.stars * 10}.png`}
                 />
                 <div className="product-rating-count link-primary">{product.rating.count}</div>
@@ -70,7 +75,8 @@ function Product({ product, loadCart }) {
                 <select
                     // 通过set将选择的状态修改,新的选择状态会立刻刷新到屏幕上
                     value={quantity}
-                    onChange={selectQuantity}>
+                    onChange={selectQuantity}
+                >
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -88,14 +94,16 @@ function Product({ product, loadCart }) {
 
             <div
                 className="added-to-cart"
-                style={{ opacity: added ? 1 : 0 }}>
+                style={{ opacity: added ? 1 : 0 }}
+            >
                 <img src="images/icons/checkmark.png" />
                 Added
             </div>
 
             <button
                 className="add-to-cart-button button-primary"
-                onClick={addToCart}>
+                onClick={addToCart}
+            >
                 Add to Cart
             </button>
         </div>
