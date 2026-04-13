@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 import LoadingSpinnerImage from "../assets/loading-spinner.gif";
 import "./ChatInput.css";
 
-type chatMessages = {
+type ChatMessages = {
     message: string | React.ReactNode;
     sender: string;
     time?: number;
@@ -13,8 +13,8 @@ type chatMessages = {
 };
 
 type ChatInputProps = {
-    chatMessages: chatMessages[];
-    setChatMessages: (chatMessages: chatMessages[]) => void;
+    chatMessages: ChatMessages[];
+    setChatMessages: (chatMessages: ChatMessages[]) => void;
 };
 
 export function ChatInput({ chatMessages, setChatMessages }: ChatInputProps) {
