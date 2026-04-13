@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Chatbot } from "supersimpledev";
-import React from 'react'
+import React from "react";
 import dayjs from "dayjs";
 import LoadingSpinnerImage from "../assets/loading-spinner.gif";
 import "./ChatInput.css";
@@ -24,7 +24,8 @@ export function ChatInput({ chatMessages, setChatMessages }: ChatInputProps) {
     const [inputText, setInputText] = useState("");
     const [isLoading, setLoading] = useState(false);
 
-    function saveInputText(event: React.ChangeEvent<HTMLInputElement>) {
+    // function saveInputText(event: React.ChangeEvent<HTMLInputElement>) {
+    function saveInputText(event: { target: { value: string } }) {
         setInputText(event.target.value);
     }
 
@@ -82,6 +83,9 @@ export function ChatInput({ chatMessages, setChatMessages }: ChatInputProps) {
     }
 
     function enterDown(event: React.KeyboardEvent<HTMLInputElement>) {
+    // function enterDown(event: { _reactName: string, _targetInst: null; type: string; native}) {
+    // 对象中嵌套了对象,此种穷举法无法实现
+        console.log('event:',event);
         if (event.key === "Enter") {
             sendMessage();
         }
