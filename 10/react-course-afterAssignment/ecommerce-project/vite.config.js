@@ -19,4 +19,6 @@ export default defineConfig({
         outDir:'../ecommerce-backend/dist'
     }
 });
-// TODO: 尝试删除AWS 10:37:00
+// TODO: 尝试:删除AWS 10:37:00
+// TODO: 观看:如何部署网页 youtube视频
+// TODD: 观看:什么是后端 youtube视频

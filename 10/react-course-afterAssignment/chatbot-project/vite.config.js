@@ -7,4 +7,5 @@ export default defineConfig({
     server: {
         open: "/",
     },
+    base:'/chatbot-project'
 });
