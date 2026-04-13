@@ -29,6 +29,8 @@ function App() {
     useEffect(() => {
         localStorage.setItem("messages", JSON.stringify(chatMessages));
     }, [chatMessages]);
+
+    // console.log(chatMessages);
     return (
         <>
             <title>{ title}</title>
