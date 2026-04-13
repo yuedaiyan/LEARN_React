@@ -5,8 +5,17 @@ import LogoWhite from "../assets/images/logo-white.png";
 import { useState } from "react";
 import "./Header.css";
 
+// 定义类型
+type HeaderProps = {
+    cart: {
+        productId: string;
+        quantity: number;
+        diliveryOptionId: string;
+    }[];
+};
+
 // 从props中获取cart对象,之后会从中求得商品总数
-function Header({ cart }) {
+function Header({ cart }: HeaderProps) {
     const navigate = useNavigate();
     let totalQuantity = 0;
 
