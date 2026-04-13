@@ -13,7 +13,7 @@ type ChatMessagesProps = {
 
 // 渲染函数 → 传入的是历史的聊天记录
 function ChatMessages({ chatMessages }: ChatMessagesProps) {
-    console.log("chatMessages:", chatMessages);
+    // console.log("chatMessages:", chatMessages);
     const chatMessageRef = useAutoScroll(chatMessages);
 
     return (

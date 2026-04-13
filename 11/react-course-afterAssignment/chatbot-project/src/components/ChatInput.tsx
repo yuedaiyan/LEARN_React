@@ -1,14 +1,30 @@
 import { useState } from "react";
 import { Chatbot } from "supersimpledev";
+import React from 'react'
 import dayjs from "dayjs";
 import LoadingSpinnerImage from "../assets/loading-spinner.gif";
 import "./ChatInput.css";
 
-export function ChatInput({ chatMessages, setChatMessages }) {
+type chatMessages = {
+    message: string | React.ReactNode;
+    sender: string;
+    time?: number;
+    id: string;
+};
+
+type ChatInputProps = {
+    chatMessages: chatMessages[];
+    setChatMessages: (chatMessages: chatMessages[]) => void;
+};
+
+export function ChatInput({ chatMessages, setChatMessages }: ChatInputProps) {
+    // console.log("chatMessages:", chatMessages);
+    // console.log("setChatMessages:", setChatMessages);
+
     const [inputText, setInputText] = useState("");
     const [isLoading, setLoading] = useState(false);
 
-    function saveInputText(event) {
+    function saveInputText(event: React.ChangeEvent<HTMLInputElement>) {
         setInputText(event.target.value);
     }
 
@@ -65,7 +81,7 @@ export function ChatInput({ chatMessages, setChatMessages }) {
         setLoading(false);
     }
 
-    function enterDown(event) {
+    function enterDown(event: React.KeyboardEvent<HTMLInputElement>) {
         if (event.key === "Enter") {
             sendMessage();
         }
@@ -75,7 +91,7 @@ export function ChatInput({ chatMessages, setChatMessages }) {
     }
 
     function cleanMessages() {
-        localStorage.setItem("messages", '[]');
+        localStorage.setItem("messages", "[]");
         setChatMessages([]);
     }
 
@@ -84,7 +100,7 @@ export function ChatInput({ chatMessages, setChatMessages }) {
             <input
                 className="chat-input"
                 placeholder="Send a message to Chatbot"
-                size="30"
+                size={30}
                 onChange={saveInputText}
                 value={inputText}
                 onKeyDown={enterDown}
@@ -93,10 +109,16 @@ export function ChatInput({ chatMessages, setChatMessages }) {
             <button
                 className="send-button"
                 // 一旦发生点击行为 → 执行 sendMeaasge函数
-                onClick={sendMessage}>
+                onClick={sendMessage}
+            >
                 Send
             </button>
-            <button className="clear-button" onClick={cleanMessages}>Clear</button>
+            <button
+                className="clear-button"
+                onClick={cleanMessages}
+            >
+                Clear
+            </button>
         </div>
     );
 }

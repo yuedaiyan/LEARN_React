@@ -9,7 +9,7 @@ type ChatMessagesProps = {
 
 // 自制 hook
 export function useAutoScroll(dependencies: ChatMessagesProps) {
-    console.log("dependencies:", dependencies);
+    // console.log("dependencies:", dependencies);
 
     // const chatMessageRef = useRef(null);
     const chatMessagesRef = useRef<HTMLDivElement>(null);
