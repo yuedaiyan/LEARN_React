@@ -3,8 +3,14 @@ import RobotProfileImage from "../assets/robot.png";
 import UserProfileImage from "../assets/yuedaiyan.jpg";
 import "./ChatMessage.css";
 
+type ChatMessageProps = {
+    message: string;
+    sender: string;
+    time: number;
+};
+
 // 传入一条消息 进行渲染
-export function ChatMessage({ message, sender, time }) {
+export function ChatMessage({ message, sender, time }: ChatMessageProps) {
     return (
         <div className={sender === "user" ? "chat-message-user" : "chat-message-robot"}>
             {sender === "robot" && (
