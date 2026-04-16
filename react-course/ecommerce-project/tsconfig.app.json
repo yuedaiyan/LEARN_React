@@ -18,6 +18,9 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
+    // 添加类型扩展,允许ts读取vitest中的相关类型
+    "types": ["@testing-library/jest-dom"],
+
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,

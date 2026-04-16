@@ -7,14 +7,15 @@ import { MemoryRouter } from "react-router";
 import axios from "axios";
 vi.mock("axios");
 import HomePage from "./HomePage";
+import type { LoadCart } from "../../types";
 
 describe("HomePage component", () => {
-    let loadCart;
+    let loadCart: LoadCart;
     beforeEach(() => {
         loadCart = vi.fn();
 
         // 劫持:返回商品请求 → 只返回两个商品
-        axios.get.mockImplementation(async urlPath => {
+        vi.mocked(axios.get).mockImplementation(async urlPath => {
             if (urlPath === "/api/products") {
                 return {
                     data: [
@@ -44,7 +45,6 @@ describe("HomePage component", () => {
                 };
             }
         });
-    
 
         render(
             // 因为Homepage里面有Header,Header里面有Link,所以必须使用Router包裹
@@ -56,11 +56,9 @@ describe("HomePage component", () => {
                 ,
             </MemoryRouter>,
         );
-
     });
 
     it("displays the products correct", async () => {
-
         // find可以等到异步结束,一直等,直到直到位置
         const productContainers = await screen.findAllByTestId("product-container");
 

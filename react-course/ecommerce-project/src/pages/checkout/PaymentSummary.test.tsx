@@ -7,10 +7,11 @@ import { MemoryRouter, useLocation } from "react-router";
 import axios from "axios";
 vi.mock("axios");
 import PaymentSummary from "./PaymentSummary";
+import type { LoadCart, PaymentSummary as PaymentSummaryType } from "../../types";
 
 describe("PaymentSummary component", () => {
-    let loadCart;
-    let paymentSummary;
+    let loadCart: LoadCart;
+    let paymentSummary: PaymentSummaryType;
 
     beforeEach(() => {
         loadCart = vi.fn();
@@ -33,12 +34,12 @@ describe("PaymentSummary component", () => {
                 />
             </MemoryRouter>,
         );
-        expect(within(screen.getByTestId("payment-summary-row-items")).getByText("Items (3):")).toBeInTheDocument;
-        expect(within(screen.getByTestId("payment-summary-row-items")).getByText("$42.75")).toBeInTheDocument;
-        expect(within(screen.getByTestId("payment-summary-row-shipping")).getByText("$4.99")).toBeInTheDocument;
-        expect(within(screen.getByTestId("payment-summary-row-totalBeforeTax")).getByText("$47.74")).toBeInTheDocument;
-        expect(within(screen.getByTestId("payment-summary-row-estimatedTax")).getByText("$4.77")).toBeInTheDocument;
-        expect(within(screen.getByTestId("payment-summary-row-orderTotal")).getByText("$52.51")).toBeInTheDocument;
+        expect(within(screen.getByTestId("payment-summary-row-items")).getByText("Items (3):")).toBeInTheDocument();
+        expect(within(screen.getByTestId("payment-summary-row-items")).getByText("$42.75")).toBeInTheDocument();
+        expect(within(screen.getByTestId("payment-summary-row-shipping")).getByText("$4.99")).toBeInTheDocument();
+        expect(within(screen.getByTestId("payment-summary-row-totalBeforeTax")).getByText("$47.74")).toBeInTheDocument();
+        expect(within(screen.getByTestId("payment-summary-row-estimatedTax")).getByText("$4.77")).toBeInTheDocument();
+        expect(within(screen.getByTestId("payment-summary-row-orderTotal")).getByText("$52.51")).toBeInTheDocument();
     });
 
     it("'Place Order' button", async () => {
@@ -64,6 +65,6 @@ describe("PaymentSummary component", () => {
 
         expect(axios.post).toHaveBeenCalledWith("/api/orders");
         expect(loadCart).toHaveBeenCalled();
-        expect(screen.getByTestId('url-path')).toHaveTextContent('/orders')
+        expect(screen.getByTestId("url-path")).toHaveTextContent("/orders");
     });
 });

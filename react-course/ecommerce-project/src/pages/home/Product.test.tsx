@@ -4,12 +4,13 @@ import userEvent from "@testing-library/user-event";
 import Product from "./Product";
 // 劫持整个axios库
 import axios from "axios";
+import type { Product as ProductType, LoadCart } from "../../types";
 vi.mock("axios");
 
 describe("Product component", () => {
-    let product;
-    let loadCart;
-    let user;
+    let product: ProductType;
+    let loadCart: LoadCart;
+    let user: ReturnType<typeof userEvent.setup>;
 
     beforeEach(() => {
         // 劫持传入商品信息
@@ -56,7 +57,7 @@ describe("Product component", () => {
     });
 
     it("adds a product to the cart", async () => {
-        // // 虚假渲染
+        // 虚假渲染
         // render(
         //     <Product
         //         product={product}

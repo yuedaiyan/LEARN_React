@@ -6,6 +6,7 @@ export type Product = {
     name: string;
     rating: Rating;
     priceCents: number;
+    keywords:string[]
 };
 
 type Rating = {
