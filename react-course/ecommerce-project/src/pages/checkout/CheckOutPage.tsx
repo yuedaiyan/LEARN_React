@@ -9,7 +9,7 @@ import type { PaymentSummary as PaymentSummaryType, DeliveryOptions, Cart, LoadC
 
 function CheckOutPage({ cart, loadCart }: { cart: Cart; loadCart: LoadCart }) {
     // 数据源于后端,用于储存"寄送相关数据"的状态,按照当前的时间,计算出三种快递套餐所带来的三种快递状态
-    const [deliveryOptions, setDeliveryOptiions] = useState<DeliveryOptions | null>(null);
+    const [deliveryOptions, setDeliveryOptions] = useState<DeliveryOptions | null>(null);
     // 数据源于后端,用于储存下单界面中的 右侧结算 相关信息
     const [paymentSummary, setPaymentSummary] = useState<PaymentSummaryType | null>(null);
 
@@ -17,7 +17,7 @@ function CheckOutPage({ cart, loadCart }: { cart: Cart; loadCart: LoadCart }) {
     useEffect(() => {
         (async () => {
             const response = await axios.get("/api/delivery-options?expand=estimatedDeliveryTime");
-            setDeliveryOptiions(response.data);
+            setDeliveryOptions(response.data);
         })();
     }, []);
 

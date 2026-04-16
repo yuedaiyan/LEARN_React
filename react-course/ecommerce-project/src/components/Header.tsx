@@ -7,7 +7,8 @@ import "./Header.css";
 import type { Cart } from "../types";
 
 // 从props中获取cart对象,之后会从中求得商品总数
-function Header({ cart }: { cart: Cart }) {
+// 让cart成为可选项,404page中就不会有cart传入
+function Header({ cart=[] }: { cart?: Cart }) {
     const navigate = useNavigate();
     let totalQuantity = 0;
 

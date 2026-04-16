@@ -11,6 +11,9 @@ import type { Order } from "../../types";
 
 function TrackingPage({ cart }: { cart: Cart }) {
     const { orderId, productId } = useParams();
+    // useParams()可能会返回空值,因此添加非空检查
+    if (!orderId) return;
+
     // 设置 order的类型,可能是Order也可能是null
     const [order, setOrder] = useState<Order | null>(null);
 

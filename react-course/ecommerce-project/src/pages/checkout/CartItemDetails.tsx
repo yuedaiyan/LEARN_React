@@ -3,7 +3,7 @@ import { useState } from "react";
 import formatMoney from "../../utils/money";
 import type { CartItem, LoadCart } from "../../types";
 
-function CartItemDetials({ cartItem, loadCart }: { cartItem: CartItem; loadCart: LoadCart }) {
+export default function CartItemDetails({ cartItem, loadCart }: { cartItem: CartItem; loadCart: LoadCart }) {
     const [isQuantityUpdate, setIsQuantityUpdate] = useState(false);
     const [quantity, setQuantity] = useState(cartItem.quantity);
 
@@ -81,5 +81,3 @@ function CartItemDetials({ cartItem, loadCart }: { cartItem: CartItem; loadCart:
         </>
     );
 }
-
-export default CartItemDetials;
