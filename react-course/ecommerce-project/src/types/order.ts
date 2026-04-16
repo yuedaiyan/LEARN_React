@@ -24,3 +24,19 @@ export type OrderDetailsGridProps = {
 };
 
 export type Orders = Order[];
+
+export type PaymentSummary = {
+    totalItems: number;
+    productCostCents: number;
+    shippingCostCents: number;
+    totalCostBeforeTaxCents: number;
+    taxCents: number;
+    totalCostCents: number;
+};
+export type DeliveryOptions = DeliveryOption[];
+
+export type DeliveryOption = {
+    id: string;
+    priceCents: number;
+    estimatedDeliveryTimeMs: number
+};

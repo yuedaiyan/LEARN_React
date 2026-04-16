@@ -5,12 +5,13 @@ import PaymentSummary from "./PaymentSummary";
 import { useState, useEffect } from "react";
 import Signature from "../../components/Signature";
 import "./CheckOutPage.css";
+import type { PaymentSummary as PaymentSummaryType, DeliveryOptions, Cart, LoadCart } from "../../types";
 
-function CheckOutPage({ cart, loadCart }) {
+function CheckOutPage({ cart, loadCart }: { cart: Cart; loadCart: LoadCart }) {
     // 数据源于后端,用于储存"寄送相关数据"的状态,按照当前的时间,计算出三种快递套餐所带来的三种快递状态
-    const [deliveryOptions, setDeliveryOptiions] = useState([]);
+    const [deliveryOptions, setDeliveryOptiions] = useState<DeliveryOptions | null>(null);
     // 数据源于后端,用于储存下单界面中的 右侧结算 相关信息
-    const [paymentSummary, setPaymentSummary] = useState([]);
+    const [paymentSummary, setPaymentSummary] = useState<PaymentSummaryType | null>(null);
 
     // 使用axios,获得当前时间下的三种快递状态
     useEffect(() => {
@@ -32,6 +33,7 @@ function CheckOutPage({ cart, loadCart }) {
     // console.log("cart:\n", cart);
     // console.log("paymentSummary:\n", paymentSummary);
 
+    if (!paymentSummary || !deliveryOptions) return null;
     return (
         <>
             <title>Checkout</title>
@@ -60,7 +62,7 @@ function CheckOutPage({ cart, loadCart }) {
                 </div>
             </div>
 
-            <Signature/>
+            <Signature />
         </>
     );
 }

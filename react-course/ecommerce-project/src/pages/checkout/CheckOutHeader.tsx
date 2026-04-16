@@ -2,9 +2,9 @@ import { Link } from "react-router";
 import "./CheckOutHeader.css";
 import MobileLogo from "../../assets/images/mobile-logo.png";
 import Logo from "../../assets/images/logo.png";
+import type { Cart } from "../../types";
 
-function CheckOutHeader({ cart }) {
-
+function CheckOutHeader({ cart }: { cart: Cart }) {
     // 压缩 let totalQuantity=0 和 .forEach(…)
     const totalQuantity = cart.reduce((total, cartItem) => total + cartItem.quantity, 0);
 
@@ -19,7 +19,7 @@ function CheckOutHeader({ cart }) {
                         />
                         <img
                             className="mobile-logo"
-                            sre={MobileLogo}
+                            src={MobileLogo}
                         />
                     </Link>
                 </div>
@@ -28,7 +28,8 @@ function CheckOutHeader({ cart }) {
                     Checkout (
                     <Link
                         className="return-to-home-link"
-                        to="/">
+                        to="/"
+                    >
                         {totalQuantity} items
                     </Link>
                     )

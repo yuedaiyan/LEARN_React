@@ -1,8 +1,9 @@
 import axios from "axios";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 import formatMoney from "../../utils/money";
+import type { PaymentSummary as PaymentSummaryType, LoadCart } from "../../types";
 
-function PaymentSummary({ paymentSummary, loadCart }) {
+function PaymentSummary({ paymentSummary, loadCart }: { paymentSummary: PaymentSummaryType; loadCart: LoadCart }) {
     const navigate = useNavigate();
 
     const createOrder = async () => {
@@ -11,13 +12,12 @@ function PaymentSummary({ paymentSummary, loadCart }) {
         // 下单之后,跳转至 清单状态(order) 页面
         navigate("/orders");
     };
-    useNavigate("/orders");
 
     return (
         <div className="payment-summary">
             <div className="payment-summary-title">Payment Summary</div>
 
-            {/* 用于检查payment-summary是否存在 → 确定存在后,渲染右侧结算模块 */}
+            {/* && 用于检查payment-summary是否存在 → 确定存在后,渲染右侧结算模块 */}
             {paymentSummary && (
                 <>
                     <div

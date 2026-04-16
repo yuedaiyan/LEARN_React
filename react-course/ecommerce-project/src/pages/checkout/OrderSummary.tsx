@@ -1,24 +1,30 @@
 import DeliveryOptions from "./DeliveryOptions";
 import CartItemDetials from "./CartItemDetails";
 import DeliveryDate from "./DeliveryDate";
+import type { DeliveryOptions as DeliveryOptionsType, Cart, LoadCart } from "../../types";
 
-function OrderSummary({ deliveryOptions, cart ,loadCart}) {
+function OrderSummary({ deliveryOptions, cart, loadCart }: { deliveryOptions: DeliveryOptionsType; cart: Cart; loadCart: LoadCart }) {
     return (
         <div className="order-summary">
-            {/* 检测当前是否存在订单 → 确定存在订单,渲染左侧商品详情模块 */}
+            {/* && 检测当前是否存在订单 → 确定存在订单,渲染左侧商品详情模块 */}
             {deliveryOptions.length > 0 &&
-                cart.map((cartItem) => {
-                    const selectedDeliveryOption = deliveryOptions.find((deliveryOption) => {
+                cart.map(cartItem => {
+                    const selectedDeliveryOption = deliveryOptions.find(deliveryOption => {
                         return deliveryOption.id === cartItem.deliveryOptionId;
                     });
+                    if (!selectedDeliveryOption) return null;
                     return (
                         <div
                             key={cartItem.productId}
-                            className="cart-item-container">
+                            className="cart-item-container"
+                        >
                             <DeliveryDate selectedDeliveryOption={selectedDeliveryOption} />
 
                             <div className="cart-item-details-grid">
-                                <CartItemDetials cartItem={cartItem} loadCart={loadCart}/>
+                                <CartItemDetials
+                                    cartItem={cartItem}
+                                    loadCart={loadCart}
+                                />
 
                                 <DeliveryOptions
                                     cartItem={cartItem}

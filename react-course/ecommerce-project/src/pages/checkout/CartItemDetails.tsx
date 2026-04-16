@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
 import formatMoney from "../../utils/money";
+import type { CartItem, LoadCart } from "../../types";
 
-function CartItemDetials({ cartItem, loadCart }) {
+function CartItemDetials({ cartItem, loadCart }: { cartItem: CartItem; loadCart: LoadCart }) {
     const [isQuantityUpdate, setIsQuantityUpdate] = useState(false);
     const [quantity, setQuantity] = useState(cartItem.quantity);
 
@@ -44,7 +45,7 @@ function CartItemDetials({ cartItem, loadCart }) {
                                 <input
                                     className="quantity-input"
                                     type="text"
-                                    vlaue={quantity}
+                                    value={quantity}
                                     onChange={event => {
                                         setQuantity(Number(event.target.value));
                                     }}

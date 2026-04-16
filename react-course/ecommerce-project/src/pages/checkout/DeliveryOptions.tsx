@@ -1,13 +1,13 @@
 import dayjs from "dayjs";
 import axios from "axios";
-
 import formatMoney from "../../utils/money";
+import type { DeliveryOptions as DeliveryOptionsType, CartItem, LoadCart } from "../../types";
 
-function DeliveryOptions({ deliveryOptions, cartItem, loadCart }) {
+function DeliveryOptions({ deliveryOptions, cartItem, loadCart }: { deliveryOptions: DeliveryOptionsType; cartItem: CartItem; loadCart: LoadCart }) {
     return (
         <div className="delivery-options">
             <div className="delivery-options-title">Choose a delivery option:</div>
-            {deliveryOptions.map((deliveryOption) => {
+            {deliveryOptions.map(deliveryOption => {
                 let priceString = "Free Shipping";
                 if (deliveryOption.priceCents > 0) {
                     priceString = `${formatMoney(deliveryOption.priceCents)} - Shipping`;
@@ -25,7 +25,8 @@ function DeliveryOptions({ deliveryOptions, cartItem, loadCart }) {
                     <div
                         key={deliveryOption.id}
                         className="delivery-option"
-                        onClick={updateDeliveryOption}>
+                        onClick={updateDeliveryOption}
+                    >
                         <input
                             type="radio"
                             checked={deliveryOption.id === cartItem.deliveryOptionId}
