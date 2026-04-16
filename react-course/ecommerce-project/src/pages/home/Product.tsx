@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
 import formatMoney from "../../utils/money";
+import type { Product as ProductType, LoadCart } from "../../types";
 
 // 功能: 渲染主页上的一个具体的商品
-function Product({ product, loadCart }) {
-    const [quantity, setQuantity] = useState(1);
-    const [added, setAdded] = useState(false);
-    const addedRef = useRef(null);
+function Product({ product, loadCart }: { product: ProductType; loadCart: LoadCart }) {
+    const [quantity, setQuantity] = useState<number>(1);
+    const [added, setAdded] = useState<boolean>(false);
+    const addedRef = useRef<null | number>(null);
 
     // 组件卸载的时候清理计时器
     useEffect(() => {
@@ -39,7 +40,7 @@ function Product({ product, loadCart }) {
         await loadCart();
     };
 
-    const selectQuantity = event => {
+    const selectQuantity = (event: React.ChangeEvent<HTMLSelectElement>) => {
         // console.log("event.target:\n", event.target);
         // console.log("event.target.value:\n", event.target.value);
         const quantitySelected = Number(event.target.value);

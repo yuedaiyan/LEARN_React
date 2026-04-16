@@ -4,4 +4,4 @@ export type Cart = {
     diliveryOptionId: string;
 }[];
 
-export type LoadCart = () => void;
+export type LoadCart = () => Promise<void>;

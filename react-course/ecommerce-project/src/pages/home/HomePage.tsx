@@ -5,8 +5,9 @@ import Header from "../../components/Header";
 import ProductsGrid from "./ProductsGrid";
 import "./HomePage.css";
 import Signature from "../../components/Signature";
+import type { Cart, LoadCart } from "../../types";
 
-function HomePage({ cart, loadCart }) {
+function HomePage({ cart, loadCart }: { cart: Cart; loadCart: LoadCart }) {
     const [searchParams] = useSearchParams();
     const search = searchParams.get("search") || "";
 
@@ -40,7 +41,7 @@ function HomePage({ cart, loadCart }) {
                 />
             </div>
 
-            <Signature/>
+            <Signature />
         </>
     );
 }

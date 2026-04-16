@@ -1,10 +1,5 @@
 // import dayjs from "dayjs";
-
-export type Product = {
-    id: string;
-    image: string;
-    name: string;
-};
+import type { Product } from "./products";
 
 export type OrderProduct = {
     id: string;
