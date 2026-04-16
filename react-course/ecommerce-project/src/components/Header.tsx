@@ -8,7 +8,7 @@ import type { Cart } from "../types";
 
 // 从props中获取cart对象,之后会从中求得商品总数
 // 让cart成为可选项,404page中就不会有cart传入
-function Header({ cart=[] }: { cart?: Cart }) {
+function Header({ cart = [] }: { cart?: Cart }) {
     const navigate = useNavigate();
     let totalQuantity = 0;
 
@@ -49,12 +49,17 @@ function Header({ cart=[] }: { cart?: Cart }) {
                     onChange={event => {
                         setSearch(event.target.value);
                     }}
+                    onKeyDown={event => {
+                        if (event.key === "Enter") {
+                            navigate(`/?search=${search}`);
+                        }
+                    }}
                 />
 
                 <button
                     className="search-button"
                     onClick={() => {
-                        console.log(search);
+                        // console.log("search:\n",search);
                         navigate(`/?search=${search}`);
                     }}
                 >
@@ -90,5 +95,4 @@ function Header({ cart=[] }: { cart?: Cart }) {
 }
 export default Header;
 
-// TODO: 搜索框添加 Enter 交互
 // TODO: 为搜索框 Enter 添加测试,完成后以 assignment 9k commit
