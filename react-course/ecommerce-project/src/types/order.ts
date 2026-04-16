@@ -1,4 +1,3 @@
-// import dayjs from "dayjs";
 import type { Product } from "./products";
 
 export type OrderProduct = {

@@ -5,7 +5,7 @@ import Header from "../../components/Header";
 import ProductsGrid from "./ProductsGrid";
 import "./HomePage.css";
 import Signature from "../../components/Signature";
-import type { Cart, LoadCart } from "../../types";
+import type { Cart, LoadCart, Products } from "../../types";
 
 function HomePage({ cart, loadCart }: { cart: Cart; loadCart: LoadCart }) {
     const [searchParams] = useSearchParams();
@@ -13,7 +13,7 @@ function HomePage({ cart, loadCart }: { cart: Cart; loadCart: LoadCart }) {
 
     // console.log("search in homePage:\n", search);
 
-    const [products, setPorducts] = useState([]);
+    const [products, setPorducts] = useState<Products>([]);
     useEffect(() => {
         (async () => {
             const url = search ? `/api/products?search=${search}` : "/api/products";

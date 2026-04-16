@@ -7,6 +7,7 @@ import NotFoundPage from "./pages/not-found/NotFoundPage";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
+import type{ Cart } from "./types";
 
 // TODO: ts 类型声名
 declare global {
@@ -21,7 +22,7 @@ window.axios = axios;
 
 function App() {
     // 将 cart 提升到最高处,防止在不同页面重复加载 cart
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState<Cart>([]);
 
     // 从后端刷新前端购物车状态
     const loadCart = async () => {

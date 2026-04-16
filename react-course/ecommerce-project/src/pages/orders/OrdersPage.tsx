@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import OrdersGrid from "./OrdersGrid";
 import Signature from "../../components/Signature";
 import "./OrdersPage.css";
-import type { Cart, LoadCart } from "../../types";
+import type { Cart, LoadCart, Orders } from "../../types";
 
 type OrderPageProps = {
     cart: Cart;
@@ -12,7 +12,7 @@ type OrderPageProps = {
 };
 
 function OrdersPage({ cart, loadCart }: OrderPageProps) {
-    const [orders, setOrders] = useState([]);
+    const [orders, setOrders] = useState<Orders>([]);
 
     useEffect(() => {
         (async () => {
