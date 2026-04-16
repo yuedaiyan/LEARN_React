@@ -47,7 +47,6 @@ function Header({ cart=[] }: { cart?: Cart }) {
                     placeholder="Search"
                     defaultValue={search}
                     onChange={event => {
-                        // searchText = event.target.value;
                         setSearch(event.target.value);
                     }}
                 />
@@ -90,3 +89,6 @@ function Header({ cart=[] }: { cart?: Cart }) {
     );
 }
 export default Header;
+
+// TODO: 搜索框添加 Enter 交互
+// TODO: 为搜索框 Enter 添加测试,完成后以 assignment 9k commit

@@ -36,4 +36,3 @@ export default defineConfig({
         outDir: "../ecommerce-backend/dist",
     },
 });
-// TODO: (Optional)删除AWS: https://www.youtube.com/watch?v=TtPXvEcE11E&t=36608s 10:37:00
