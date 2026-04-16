@@ -8,7 +8,7 @@ import type { Cart } from "../types";
 
 // 从props中获取cart对象,之后会从中求得商品总数
 // 让cart成为可选项,404page中就不会有cart传入
-function Header({ cart = [] }: { cart?: Cart }) {
+export default function Header({ cart = [] }: { cart?: Cart }) {
     const navigate = useNavigate();
     let totalQuantity = 0;
 
@@ -93,6 +93,3 @@ function Header({ cart = [] }: { cart?: Cart }) {
         </div>
     );
 }
-export default Header;
-
-// TODO: 为搜索框 Enter 添加测试,完成后以 assignment 9k commit
